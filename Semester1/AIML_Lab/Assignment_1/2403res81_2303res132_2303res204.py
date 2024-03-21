@@ -84,7 +84,7 @@ def dfs(start,target):
     while stack:
         curr,steps = stack.pop(-1)
         if curr == target:
-            print(f"DFS : State found with steps {steps}")
+            print(f"DFS : Target found with steps {steps}")
             return True
 
         visited.add(convert_arr_tuple(curr))
@@ -113,7 +113,7 @@ def bfs(start,target):
         curr,steps = queue.pop(0)
         count+=1
         if curr == target:
-            print(f"BFS : State found with steps {steps}")
+            print(f"BFS : Target found with steps {steps}")
             return True
 
         visited.add(convert_arr_tuple(curr))
