@@ -75,16 +75,16 @@ def dfs(start,target):
     This function performs depth first search on input state matrix
     :param start: it is the initial state matrix
     :param target: target matrix to reach
-    :return: prints the cost if target is reached else returns None
+    :return: prints the number of steps if target is reached else returns None
     """
     stack = []
     visited = set()
 
     stack.append((start,0))
     while stack:
-        curr,cost = stack.pop(-1)
+        curr,steps = stack.pop(-1)
         if curr == target:
-            print(f"DFS : State found with cost {cost}")
+            print(f"DFS : State found with steps {steps}")
             return True
 
         visited.add(convert_arr_tuple(curr))
@@ -94,7 +94,7 @@ def dfs(start,target):
         for new_state in new_states:
             temp = convert_arr_tuple(new_state)
             if temp not in visited:
-                stack.append((new_state,cost+1)) # increment the cost by 1 to know total steps taken to reach the target
+                stack.append((new_state,steps+1)) # increment the steps by 1 to know total steps taken to reach the target
     return False
 
 def bfs(start,target):
@@ -102,18 +102,18 @@ def bfs(start,target):
     This function performs breadth first search on input state matrix
     :param start:it is the initial state matrix
     :param target: target matrix to reach
-    :return:prints the cost if target is reached else returns None
+    :return:prints the number of steps if target is reached else returns None
     """
     queue = []
     visited = set()
 
-    queue.append((start,0)) # append the state and current cost to reach the target
+    queue.append((start,0)) # append the state and current steps to reach the target
     count = 0
     while queue:
-        curr,cost = queue.pop(0)
+        curr,steps = queue.pop(0)
         count+=1
         if curr == target:
-            print(f"BFS : State found with cost {cost}")
+            print(f"BFS : State found with steps {steps}")
             return True
 
         visited.add(convert_arr_tuple(curr))
@@ -123,7 +123,7 @@ def bfs(start,target):
         for new_state in new_states:
             temp = convert_arr_tuple(new_state)
             if temp not in visited:
-                queue.append((new_state,cost+1)) # increment the cost by 1 to know total steps taken to reach the target
+                queue.append((new_state,steps+1)) # increment the steps by 1 to know total steps taken to reach the target
     return False
 
 def main():
