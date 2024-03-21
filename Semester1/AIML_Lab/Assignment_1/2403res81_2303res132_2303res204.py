@@ -1,15 +1,19 @@
 import random
 
 def create_initial_state(state_values):
+    """
+    :param state_values: list of values containing number from 1 to 8 and 'B'
+    :return: state matrix generated from shuffled state_values
+    """
     random.shuffle(state_values)
     rows = 3
     cols = 3
     state_matrix = []
-    #print("Initial state is : ")
+    print("New Initial state is : ")
     for row in range(rows):
         temp_row = state_values[row*3:(row+1)*3]
         state_matrix.append(temp_row)
-    #print(state_matrix)
+    print(state_matrix)
     return state_matrix
 
 def find_blank_tile(state):
@@ -122,17 +126,38 @@ def bfs(start,target):
                 queue.append((new_state,cost+1)) # increment the cost by 1 to know total steps taken to reach the target
     return False
 
+def main():
+    state = [[3,2,1],[4,5,6],[8,7,'B']]
+    target = [[1,2,3],[4,5,6],[7,8,'B']]
+    state_values = [1,2,3,4,5,6,7,8,'B']
 
-#state = [[3,2,1],[4,5,6],[8,7,'B']]
-target = [[1,2,3],[4,5,6],[7,8,'B']]
-state_values = [1,2,3,4,5,6,7,8,'B']
+    '''
+    First try for the state given in assignment , if it fails start with random state and 
+    find the initial state till we reach the final state
+    '''
 
-count = 0
-while count<1000:
-    initial_state_matrix = create_initial_state(state_values)
-    #print("Target to reach is ")
-    #print(target)
-    bfs_out = bfs(initial_state_matrix,target)
-    dfs_out = dfs(initial_state_matrix, target)
-    if bfs_out and dfs_out:
-        count+=1
+    print("Initial State matrix is :")
+    print(state)
+    print("Target matrix is : ")
+    print(target)
+
+    bfs_out = bfs(state, target)
+    dfs_out = dfs(state, target)
+    if not bfs_out and not dfs_out:
+        count =0
+        flag = False
+        while count<1001:
+            initial_state_matrix = create_initial_state(state_values)
+            print("Target to reach is ")
+            print(target)
+            bfs_out = bfs(initial_state_matrix,target)
+            dfs_out = dfs(initial_state_matrix, target)
+            if not bfs_out and not dfs_out:
+                count+=1
+            else:
+                flag = True
+                break
+        if not flag:
+            print("Solution not found after 1000 iterations")
+
+main()
