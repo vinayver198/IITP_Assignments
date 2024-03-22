@@ -31,9 +31,9 @@ def find_blank_tile(state):
             if state[row][col] == 'B':
                 return [row,col]
 
-def generate_states(state):
+def generate_new_states(state):
     """
-    This function generate states based on information present in question.
+    This function generate new states based on information present in question.
     The blank can have 4 moves up,down,left and right
     :param state: state is input matrix
     :return: list of matrices by performing 4 moves
@@ -89,7 +89,7 @@ def dfs(start,target):
 
         visited.add(convert_arr_tuple(curr))
         # generate states by moving blank space
-        new_states = generate_states(curr)
+        new_states = generate_new_states(curr)
 
         for new_state in new_states:
             temp = convert_arr_tuple(new_state)
@@ -118,7 +118,7 @@ def bfs(start,target):
 
         visited.add(convert_arr_tuple(curr))
         # generate states by moving blank space
-        new_states = generate_states(curr)
+        new_states = generate_new_states(curr)
 
         for new_state in new_states:
             temp = convert_arr_tuple(new_state)
@@ -146,7 +146,7 @@ def main():
     if not bfs_out and not dfs_out:
         count =0
         flag = False
-        while count<1001:
+        while count<362880:
             initial_state_matrix = create_initial_state(state_values)
             print("Target to reach is ")
             print(target)
@@ -158,6 +158,6 @@ def main():
                 flag = True
                 break
         if not flag:
-            print("Solution not found after 1000 iterations")
+            print("Solution not found after 362880 iterations")
 
 main()
